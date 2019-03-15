@@ -1,13 +1,15 @@
 #include <iostream>
 #include <cstdlib>
+#include <ctime>
+#include <clocale>
 using namespace std;
 
 //Prototipos
 void print_table();
 void mudar_vez();
 char verificar_vencedor();
-bool marcar(int x, int y);
 void input();
+bool marcar(int n);
 
 
 //Globais
@@ -84,19 +86,8 @@ char verificar_vencedor() {
     return '0';
 }
 
-bool marcar(int x, int y) {
-    if(_table[x][y] != 'X' and _table[x][y] != 'Y') {
-        _table[x][y] = _vez;
-    }
-    else
-        return false;
-    return true;
-}
-
-void input() {
-    cout << _vez << "-> Digite o número: ";
-    int n, x, y;
-    cin >> n;
+bool marcar(int n) {
+    int x, y;
     if(n > 0 and n <= 3)
         x = 0;
     else if(n > 3 and n <= 6)
@@ -105,19 +96,32 @@ void input() {
         x = 2;
     else {
         cout << "Posição não encontrada!\n";
-        input();
-        return;
+        return false;
     }
-
+    
     if(n == 1 or n == 4 or n == 7)
         y = 0;
     else if(n == 2 or n == 5 or n == 8)
         y = 1;
     else
         y = 2;
+    
+    if(_table[x][y] != 'X' and _table[x][y] != 'Y') {
+        _table[x][y] = _vez;
+    }
+    else
+        return false;
+    return true;
+        
+}
+
+void input() {
+    cout << _vez << "-> Digite o número: ";
+    int n;
+    cin >> n;
 
     if(!marcar(x, y)) {
-        cout << "A Posição informada já está preenchida!\n";
+        cout << "A Posição informada não está disponível!\n";
         input();
     }
 }
