@@ -18,6 +18,7 @@ char _table[3][3] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
 char _vez = '0';
 
 int main (void) {
+	setlocale(LC_ALL, "portuguese");
     _vez = 'X';
     while(verificar_vencedor() == '0') {
         system("clear");
