@@ -120,7 +120,7 @@ void input() {
     int n;
     cin >> n;
 
-    if(!marcar(x, y)) {
+    if(!marcar(n)) {
         cout << "A Posição informada não está disponível!\n";
         input();
     }
